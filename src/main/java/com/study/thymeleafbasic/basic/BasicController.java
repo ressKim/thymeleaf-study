@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,10 +58,20 @@ public class BasicController {
     }
 
     @Component("helloBean")
-    static class HelloBean{
+    static class HelloBean {
         public String hello(String data) {
             return "Hello " + data;
         }
+    }
+
+    //    타임리프 유틸리티 객체 링크 - 필요할때마다 검색해서 사용하고 예시까지 보면서 하는게 좋다.
+    //    https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#expression-utilityobjects
+    //    유틸리티 객체 예시
+    //    https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#appendix-b-expressionutility-objects
+    @GetMapping("/date")
+    public String date(Model model) {
+        model.addAttribute("localDateTime", LocalDateTime.now());
+        return "basic/date";
     }
 
     @Data
